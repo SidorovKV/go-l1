@@ -3,17 +3,18 @@ package main
 import (
 	"fmt"
 	"sync"
+	"sync/atomic"
 )
 
 type Counter struct {
-	count uint
+	count *atomic.Uint64
 	mu    *sync.Mutex
 }
 
 func main() {
 	wg := new(sync.WaitGroup)
 	c := Counter{
-		count: 0,
+		count: &atomic.Uint64{},
 		mu:    new(sync.Mutex),
 	}
 	for i := 0; i < 10000000; i++ {
@@ -29,7 +30,5 @@ func main() {
 }
 
 func (c *Counter) Inc() {
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	c.count++
+	c.count.Add(1)
 }
