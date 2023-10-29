@@ -1,5 +1,9 @@
 package main
 
+import (
+	"strings"
+)
+
 var justString string
 
 func someFunc() {
@@ -12,5 +16,9 @@ func main() {
 }
 
 func createHugeString(l int) string {
-	return ""
+	out := &strings.Builder{}
+	for i := 0; i < l; i++ {
+		out.WriteString("a")
+	}
+	return out.String()
 }
