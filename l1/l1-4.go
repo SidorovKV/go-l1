@@ -25,7 +25,6 @@ func main() {
 		case <-interruptChannel:
 			fmt.Println("received interrupt")
 			cancel()
-			return
 		}
 	}()
 

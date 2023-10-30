@@ -9,7 +9,6 @@ func main() {
 
 	channel := make(chan int)
 	ws, rs := make(chan bool), make(chan bool)
-	//timeout := time.After(secondsToWork * time.Second)
 
 	go writer(ws, channel, time.After(secondsToWork*time.Second))
 	go reader(rs, channel, time.After(secondsToWork*time.Second))
@@ -42,8 +41,6 @@ func reader(rs chan bool, c <-chan int, stop <-chan time.Time) {
 			return
 		case <-c:
 			//Считано)))
-		default:
-			continue
 		}
 	}
 }

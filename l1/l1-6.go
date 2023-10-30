@@ -38,86 +38,37 @@ func main() {
 }
 
 func one(ctx context.Context) {
-	for {
-		select {
-		case <-ctx.Done():
-			fmt.Println("one done")
-			return
-		default:
-			continue
-		}
-	}
+	<-ctx.Done()
+	fmt.Println("one done")
 }
 
 func two(stop <-chan time.Time) {
-	for {
-		select {
-		case <-stop:
-			fmt.Println("two done")
-			return
-		default:
-			continue
-		}
-	}
+	<-stop
+	fmt.Println("two done")
 }
 
 func three(stop *time.Timer) {
-	for {
-		select {
-		case <-stop.C:
-			fmt.Println("three done")
-			return
-		default:
-			continue
-		}
-	}
+	<-stop.C
+	fmt.Println("three done")
 }
 
 func four(stop *time.Ticker) {
-	for {
-		select {
-		case <-stop.C:
-			fmt.Println("four done")
-			stop.Stop()
-			return
-		default:
-			continue
-		}
-	}
+	<-stop.C
+	fmt.Println("four done")
+	stop.Stop()
 }
 
 func five(ctx context.Context) {
-	for {
-		select {
-		case <-ctx.Done():
-			fmt.Println("five done")
-			return
-		default:
-			continue
-		}
-	}
+	<-ctx.Done()
+	fmt.Println("five done")
 }
 
 func six(ctx context.Context) {
-	for {
-		select {
-		case <-ctx.Done():
-			fmt.Println("six done")
-			return
-		default:
-			continue
-		}
-	}
+	<-ctx.Done()
+	fmt.Println("six done")
 }
 
 func seven(stop <-chan struct{}) {
-	for {
-		select {
-		case <-stop:
-			fmt.Println("seven done")
-			return
-		default:
-			continue
-		}
-	}
+	<-stop
+	fmt.Println("seven done")
 }
